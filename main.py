@@ -18,7 +18,7 @@ class Game:
         self.center = np.array([self.width / 2, self.height / 2])
         self.fps = 60
 
-        self.puck = Puck()
+        self.puck = Puck(self.center)
         self.score = Score()
 
  
@@ -37,12 +37,12 @@ class Game:
             self._running = False
 
     def on_loop(self):
-        
+        self.puck.move()
         pass
 
     def on_render(self):
         self.screen.blit(self.background, (0,0))
-        self.puck.render(self.screen, self.center)
+        self.screen.blit(self.puck.surface, self.puck.position)
         pygame.display.update()
         pass
     
