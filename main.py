@@ -18,7 +18,7 @@ class Game:
         self.center = np.array([self.width / 2, self.height / 2])
         self.fps = 60
 
-        self.puck = Puck(self.center)
+        self.puck = Puck(self.center, self.size)
         self.score = Score()
 
  
