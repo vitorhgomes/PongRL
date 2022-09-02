@@ -14,9 +14,6 @@ class Puck:
         
         self.size = np.array([self.surface.get_width(), self.surface.get_height()])
         self.position = position - (self.size / 2)
-
-    def render(self, screen):
-        screen.blit(self.surface, self.position)
     
     def move(self):
         left_position = self.position[0]

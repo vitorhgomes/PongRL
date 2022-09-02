@@ -6,6 +6,8 @@ import numpy as np
 
 from Assets.classes.puck import Puck
 from Assets.classes.score import Score
+from Assets.classes.player import Player
+
 
  
 class Game:
@@ -20,6 +22,9 @@ class Game:
 
         self.puck = Puck(self.center, self.size)
         self.score = Score()
+
+        self.player1 = Player(self.size)
+        self.player2 = Player(self.size, 2)
 
  
     def on_init(self):
@@ -38,11 +43,15 @@ class Game:
 
     def on_loop(self):
         self.puck.move()
+        self.player1.move()
+        self.player2.move()
         pass
 
     def on_render(self):
         self.screen.blit(self.background, (0,0))
         self.screen.blit(self.puck.surface, self.puck.position)
+        self.screen.blit(self.player1.surface, self.player1.position)
+        self.screen.blit(self.player2.surface, self.player2.position)
         pygame.display.update()
         pass
     
