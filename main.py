@@ -8,7 +8,8 @@ from Assets.classes.puck import Puck
 from Assets.classes.score import Score
 from Assets.classes.player import Player
 
-
+PLAYER_HIT = pygame.USEREVENT + 1
+NORMAL = np.array([1,0])
  
 class Game:
     def __init__(self):
@@ -26,6 +27,7 @@ class Game:
         self.player1 = Player(self.size)
         self.player2 = Player(self.size, 2)
 
+        self.reflect = np.array([-1,1])
  
     def on_init(self):
         pygame.init()
@@ -35,17 +37,19 @@ class Game:
         self.clock = pygame.time.Clock()
         self.background = pygame.image.load(os.path.join('Assets', 'sprites', 'background.png'))
 
-
  
     def on_event(self, event):
         if event.type == pygame.QUIT:
             self._running = False
+        if event.type == PLAYER_HIT:
+            self.puck.speed *= self.reflect
 
     def on_loop(self):
         self.puck.move()
         self.player1.move()
         self.player2.move()
-        pass
+        if self.player1.rectangle.colliderect(self.puck.rectangle) or self.player2.rectangle.colliderect(self.puck.rectangle):
+            pygame.event.post(pygame.event.Event(PLAYER_HIT))
 
     def on_render(self):
         self.screen.blit(self.background, (0,0))
