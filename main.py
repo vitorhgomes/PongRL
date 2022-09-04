@@ -49,7 +49,7 @@ class Game:
 
     def on_render(self):
         self.screen.blit(self.background, (0,0))
-        self.puck.rectangle = self.screen.blit(self.puck.surface, self.puck.position)
+        self.puck.rectangle = self.screen.blit(self.puck.surface, self.puck.rectangle.topleft)
         self.player1.rectangle = self.screen.blit(self.player1.surface, self.player1.rectangle.topleft)
         self.player2.rectangle = self.screen.blit(self.player2.surface, self.player2.rectangle.topleft)
 

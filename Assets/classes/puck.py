@@ -13,13 +13,15 @@ class Puck:
         self.right_limit, self.bottom_limit = limits
         
         self.size = np.array([self.surface.get_width(), self.surface.get_height()])
-        self.position = position - (self.size / 2)
+        [self.rectangle.x, self.rectangle.y] = position - (self.size / 2)
+        # self.rectangle.y = position[1] - (self.size[1] / 2)
+
     
     def move(self):
-        left_position = self.position[0]
-        right_position = self.position[0] + self.rectangle.right
-        top_position = self.position[1]
-        bottom_position = self.position[1] + self.rectangle.bottom
+        left_position = self.rectangle.left
+        right_position = self.rectangle.right
+        top_position = self.rectangle.top
+        bottom_position = self.rectangle.bottom
 
         if left_position <= self.left_limit or right_position >= self.right_limit:
             self.speed *= np.array((-1, 1))
@@ -27,4 +29,5 @@ class Puck:
         if top_position <= self.top_limit or bottom_position >= self.bottom_limit:
             self.speed *= np.array((1, -1))
         
-        self.position += self.speed
+        self.rectangle.x += self.speed[0]
+        self.rectangle.y += self.speed[1]
