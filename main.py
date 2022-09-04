@@ -49,9 +49,10 @@ class Game:
 
     def on_render(self):
         self.screen.blit(self.background, (0,0))
-        self.screen.blit(self.puck.surface, self.puck.position)
-        self.screen.blit(self.player1.surface, self.player1.position)
-        self.screen.blit(self.player2.surface, self.player2.position)
+        self.puck.rectangle = self.screen.blit(self.puck.surface, self.puck.position)
+        self.player1.rectangle = self.screen.blit(self.player1.surface, self.player1.rectangle.topleft)
+        self.player2.rectangle = self.screen.blit(self.player2.surface, self.player2.rectangle.topleft)
+
         pygame.display.update()
         pass
     
